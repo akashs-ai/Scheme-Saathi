@@ -3,14 +3,17 @@ import { useEffect, useState } from 'react';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
+import { Scene } from './components/Scene';
 import { SchemeSaathiLogo } from './components/SchemeSaathiLogo';
 import { MobileBottomNav, Sidebar } from './components/Sidebar';
 import { SchemeProvider, useSchemes } from './context/SchemeContext';
+import { AuthPage } from './views/AuthPage';
 import { CategoriesView } from './views/CategoriesView';
 import { DashboardView } from './views/DashboardView';
 import { DocumentsView } from './views/DocumentsView';
 import { FamilyBenefitsView } from './views/FamilyBenefitsView';
 import { HomeView } from './views/HomeView';
+import { LandingPage } from './views/LandingPage';
 import { ProfileWizardView } from './views/ProfileWizardView';
 import { SavedSchemesView } from './views/SavedSchemesView';
 import { SchemeDetailsView } from './views/SchemeDetailsView';
@@ -19,7 +22,7 @@ import { SettingsView } from './views/SettingsView';
 import { SupportView } from './views/SupportView';
 
 function SchemeSaathiShell() {
-  const { activeView, selectedSchemeId, toastMessage } = useSchemes();
+  const { appStage, activeView, selectedSchemeId, toastMessage } = useSchemes();
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
@@ -57,53 +60,93 @@ function SchemeSaathiShell() {
   };
 
   return (
-    <div className="min-h-screen bg-[#C8E3A9] sm:p-4 lg:p-6 flex items-stretch justify-center">
-      {/* Main Black Rounded Dashboard Shell (mirrors Screenshot 2) */}
-      <div className="w-full max-w-[1440px] min-h-screen sm:min-h-[calc(100vh-2rem)] lg:min-h-[calc(100vh-3rem)] bg-[#050505] text-white sm:rounded-[28px] lg:rounded-[34px] border border-[#1E1E1E] shadow-[0_24px_70px_rgba(5,5,5,0.28)] flex flex-col overflow-hidden relative">
-        {/* Brief Branded Loading Screen */}
-        <AnimatePresence>
-          {initializing && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed sm:absolute inset-0 z-50 bg-[#050505] flex flex-col items-center justify-center gap-3"
-            >
-              <SchemeSaathiLogo size={54} variant="lime" />
-              <p className="font-display text-lg font-bold tracking-widest text-white uppercase">
-                SchemeSaathi
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div className="min-h-screen w-full text-white flex flex-col relative">
+      {/* Persistent Live Three.js Sylva Living World Background */}
+      <Scene />
 
-        {/* Compact Dark Top Navbar inside the black container */}
-        <Navbar />
+      {/* Brief Branded Loading Screen */}
+      <AnimatePresence>
+        {initializing && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-[#4a4d44]/90 backdrop-blur-md flex flex-col items-center justify-center gap-3"
+          >
+            <SchemeSaathiLogo size={54} variant="lime" />
+            <p className="font-display text-lg font-bold tracking-widest text-white uppercase">
+              SchemeSaathi
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Body Split: Left Vertical Circular Icon Sidebar + Main Content Area */}
-        <div className="flex flex-1 min-h-0">
-          <Sidebar />
+      {/* Stage Transition: Landing -> Auth -> Main Workspace (Hero Page) */}
+      <AnimatePresence mode="wait">
+        {appStage === 'landing' && (
+          <motion.div
+            key="stage-landing"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 flex flex-col flex-1 min-h-screen pointer-events-none"
+          >
+            <LandingPage />
+          </motion.div>
+        )}
 
-          <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeView === 'details' ? `details-${selectedSchemeId}` : activeView}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {renderActiveView()}
-              </motion.div>
-            </AnimatePresence>
+        {appStage === 'auth' && (
+          <motion.div
+            key="stage-auth"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 flex flex-col flex-1 min-h-screen pointer-events-none"
+          >
+            <AuthPage />
+          </motion.div>
+        )}
 
-            <Footer />
-          </main>
-        </div>
+        {appStage === 'app' && (
+          <motion.div
+            key="stage-app"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 flex flex-col flex-1 min-h-screen pointer-events-none"
+          >
+            {/* Compact Translucent Top Navbar */}
+            <Navbar />
 
-        {/* Mobile Bottom Navigation */}
-        <MobileBottomNav />
-      </div>
+            {/* Body Split: Left Vertical Circular Icon Sidebar + Main Content Area */}
+            <div className="flex flex-1 min-h-0 pointer-events-none">
+              <Sidebar />
+
+              <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 ui-overlay-main">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeView === 'details' ? `details-${selectedSchemeId}` : activeView}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {renderActiveView()}
+                  </motion.div>
+                </AnimatePresence>
+
+                <Footer />
+              </main>
+            </div>
+
+            {/* Mobile Bottom Navigation */}
+            <MobileBottomNav />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Transient Feedback Toast */}
       <AnimatePresence>
@@ -115,7 +158,7 @@ function SchemeSaathiShell() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-16 md:bottom-8 right-5 md:right-9 z-50 bg-[#1D1D1D] border border-[#B6FF50]/60 text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-2xl max-w-sm flex items-center gap-2"
+            className="fixed bottom-16 md:bottom-8 right-5 md:right-9 z-50 glass-window-lime text-white text-xs font-medium px-4 py-2.5 rounded-full max-w-sm flex items-center gap-2 pointer-events-auto"
           >
             <span className="w-2 h-2 rounded-full bg-[#B6FF50] shrink-0" aria-hidden="true" />
             <span>{toastMessage}</span>

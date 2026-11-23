@@ -198,20 +198,20 @@ export function DashboardView() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <div className="px-3.5 py-2 rounded-full bg-[#1D1D1D] border border-[#303030] text-xs text-[#A3A3A3]">
+          <div className="px-3.5 py-2 rounded-full glass-pane text-xs text-[#C7D0BE]">
             District:{' '}
             <span className="text-white font-medium">
               {profile.district || 'All WB (23)'}
             </span>
           </div>
-          <div className="px-3.5 py-2 rounded-full bg-[#1D1D1D] border border-[#303030] text-xs text-[#A3A3A3] tabular-nums">
+          <div className="px-3.5 py-2 rounded-full glass-pane text-xs text-[#C7D0BE] tabular-nums">
             Explored: <span className="text-white font-mono font-medium">{exploredSchemeIds.length}/{SCHEMES.length}</span>
           </div>
           {!profile.isCompleted && (
             <button
               type="button"
               onClick={loadSyntheticDemoProfile}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#252525] border border-[#3A3A3A] hover:border-[#FF9D2E]/60 text-xs font-medium text-[#FF9D2E] transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full glass-pane glass-pane-hover text-xs font-medium text-[#FF9D2E] transition-colors whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Load Demo Profile</span>
@@ -238,7 +238,7 @@ export function DashboardView() {
           {/* Top 2 Compact Metric Cards (mirrors CUSTOMER & PRODUCT in Screenshot 2) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Card A: Potential Matches & Education vs Family */}
-            <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+            <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
                   POTENTIAL MATCHES
@@ -302,7 +302,7 @@ export function DashboardView() {
             </div>
 
             {/* Card B: Family Benefits & Saved Matrix (mirrors PRODUCT dot card in Screenshot 2) */}
-            <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+            <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
                   FAMILY &amp; EDUCATION
@@ -356,7 +356,7 @@ export function DashboardView() {
                           ? 'bg-[#FF9D2E]'
                           : isExplored
                           ? 'bg-white'
-                          : 'bg-[#353535]'
+                          : 'bg-white/20'
                       }`}
                     />
                   );
@@ -366,7 +366,7 @@ export function DashboardView() {
           </div>
 
           {/* Bottom-Left Wide Card: Category Coverage Capsules (inspired by Screenshot 2 bottom-left) */}
-          <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex-1 flex flex-col justify-between">
+          <div className="glass-window rounded-2xl p-5 flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between gap-2">
               <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
                 SCHEMES BY WELFARE CATEGORY
@@ -394,7 +394,7 @@ export function DashboardView() {
                     className="group flex flex-col items-center gap-2 focus:outline-none"
                   >
                     <div className="relative w-full flex flex-col items-center justify-end h-24">
-                      <div className="absolute inset-y-0 w-px bg-[#2D2D2D]" aria-hidden="true" />
+                      <div className="absolute inset-y-0 w-px bg-white/15" aria-hidden="true" />
                       <div
                         style={{ height: `${topHeight}px` }}
                         className={`relative z-10 w-8 sm:w-9 rounded-full flex items-center justify-center font-mono text-xs font-bold tabular-nums transition-transform group-hover:scale-105 ${pillTone}`}
@@ -410,7 +410,7 @@ export function DashboardView() {
               })}
             </div>
 
-            <div className="mt-5 pt-3 border-t border-[#2A2A2A] flex flex-wrap items-center justify-between gap-3 text-[11px] text-[#A3A3A3]">
+            <div className="mt-5 pt-3 border-t border-white/12 flex flex-wrap items-center justify-between gap-3 text-[11px] text-[#A3A3A3]">
               <div className="flex flex-wrap items-center gap-4">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full border-2 border-[#B6FF50]" />
@@ -433,7 +433,7 @@ export function DashboardView() {
         </div>
 
         {/* RIGHT 5 COLUMNS: APPLICATION TIMELINE (Mirrors PROJECTS TIMELINE in Screenshot 2) */}
-        <section className="xl:col-span-5 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+        <section className="xl:col-span-5 glass-window rounded-2xl p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between gap-2">
               <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
@@ -448,7 +448,7 @@ export function DashboardView() {
             </p>
 
             {/* Stage Scale Labels */}
-            <div className="mt-4 grid grid-cols-4 text-[10px] font-mono text-[#737373] border-b border-[#2A2A2A] pb-2">
+            <div className="mt-4 grid grid-cols-4 text-[10px] font-mono text-[#A3A3A3] border-b border-white/12 pb-2">
               <span>01 PREP</span>
               <span>02 READY</span>
               <span>03 SENT</span>
@@ -483,7 +483,7 @@ export function DashboardView() {
                       </div>
 
                       {/* Capsule Timeline Bar (Screenshot 2 signature motif) */}
-                      <div className="relative h-8 rounded-full bg-[#141414] border border-[#2A2A2A] overflow-hidden flex items-center">
+                      <div className="relative h-8 rounded-full glass-pane overflow-hidden flex items-center">
                         <div
                           style={{ left: `${bar.start}%`, width: `${bar.width}%` }}
                           className={`absolute h-6 rounded-full px-3 flex items-center justify-between text-[10px] font-semibold transition-all duration-200 ${bar.color} ${bar.textColor}`}
@@ -499,7 +499,7 @@ export function DashboardView() {
                           onChange={(e) =>
                             startOrUpdateApplication(scheme.id, e.target.value as ApplicationStage)
                           }
-                          className="px-2.5 py-1 text-[11px] bg-[#252525] border border-[#353535] rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
+                          className="px-2.5 py-1 text-[11px] glass-pane rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
                         >
                           {STAGES.map((st) => (
                             <option key={st} value={st} className="bg-[#1D1D1D]">
@@ -531,7 +531,7 @@ export function DashboardView() {
             )}
           </div>
 
-          <div className="mt-5 pt-3 border-t border-[#2A2A2A] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#A3A3A3]">
+          <div className="mt-5 pt-3 border-t border-white/12 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#A3A3A3]">
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#B6FF50]" />
@@ -562,7 +562,7 @@ export function DashboardView() {
       {/* ================================================================ */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         {/* Document Checklist (5 cols) */}
-        <section className="lg:col-span-5 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
+        <section className="lg:col-span-5 glass-window rounded-2xl p-5 space-y-4">
           <div className="flex items-center justify-between gap-2">
             <div>
               <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
@@ -577,7 +577,7 @@ export function DashboardView() {
             </span>
           </div>
 
-          <div className="h-1.5 w-full bg-[#252525] rounded-full overflow-hidden">
+          <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
             <div
               className="h-full bg-[#B6FF50] transition-all duration-200"
               style={{ width: `${docReadinessPct}%` }}
@@ -585,7 +585,7 @@ export function DashboardView() {
           </div>
 
           {requiredDocs.length > 0 ? (
-            <ul className="divide-y divide-[#2A2A2A] max-h-[260px] overflow-y-auto pr-1">
+            <ul className="divide-y divide-white/10 max-h-[260px] overflow-y-auto pr-1">
               {requiredDocs.map((doc) => {
                 const checked = Boolean(checkedDocuments[doc.documentName]);
                 return (
@@ -641,7 +641,7 @@ export function DashboardView() {
         </section>
 
         {/* Upcoming Deadlines (4 cols) */}
-        <section className="lg:col-span-4 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
+        <section className="lg:col-span-4 glass-window rounded-2xl p-5 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase inline-flex items-center gap-2">
               <Calendar className="w-4 h-4 text-[#FF9D2E]" aria-hidden="true" />
@@ -657,7 +657,7 @@ export function DashboardView() {
             open year-round.
           </p>
 
-          <ul className="divide-y divide-[#2A2A2A]">
+          <ul className="divide-y divide-white/10">
             {deadlineSchemes.map((scheme) => (
               <li key={scheme.id} className="py-2.5 first:pt-0 last:pb-0">
                 <button
@@ -676,7 +676,7 @@ export function DashboardView() {
         </section>
 
         {/* Quick Actions & Recommended Next Steps (3 cols) */}
-        <section className="lg:col-span-3 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
+        <section className="lg:col-span-3 glass-window rounded-2xl p-5 space-y-4">
           <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
             QUICK ACTIONS
           </h2>
@@ -685,7 +685,7 @@ export function DashboardView() {
             <button
               type="button"
               onClick={() => navigateTo('profile')}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 text-xs font-medium text-white transition-colors"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl glass-pane glass-pane-hover text-xs font-medium text-white transition-colors"
             >
               <span className="inline-flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5 text-[#B6FF50]" aria-hidden="true" />
@@ -697,7 +697,7 @@ export function DashboardView() {
             <button
               type="button"
               onClick={() => navigateTo('family')}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 text-xs font-medium text-white transition-colors"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl glass-pane glass-pane-hover text-xs font-medium text-white transition-colors"
             >
               <span className="inline-flex items-center gap-2">
                 <Users className="w-3.5 h-3.5 text-[#B6FF50]" aria-hidden="true" />
@@ -709,7 +709,7 @@ export function DashboardView() {
             <button
               type="button"
               onClick={() => navigateTo('explorer')}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 text-xs font-medium text-white transition-colors"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl glass-pane glass-pane-hover text-xs font-medium text-white transition-colors"
             >
               <span className="inline-flex items-center gap-2">
                 <Compass className="w-3.5 h-3.5 text-[#FF9D2E]" aria-hidden="true" />
@@ -721,7 +721,7 @@ export function DashboardView() {
             <button
               type="button"
               onClick={() => navigateTo('documents')}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 text-xs font-medium text-white transition-colors"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl glass-pane glass-pane-hover text-xs font-medium text-white transition-colors"
             >
               <span className="inline-flex items-center gap-2">
                 <FileCheck2 className="w-3.5 h-3.5 text-[#B6FF50]" aria-hidden="true" />
@@ -732,7 +732,7 @@ export function DashboardView() {
           </div>
 
           {/* Recommended Next Steps Compact List */}
-          <div className="pt-3 border-t border-[#2A2A2A] space-y-2.5">
+          <div className="pt-3 border-t border-white/12 space-y-2.5">
             <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[#A3A3A3]">
               Recommended Next Steps
             </h3>
@@ -785,8 +785,8 @@ export function DashboardView() {
       {/* ================================================================ */}
       {/* SAVED SCHEMES LIST                                               */}
       {/* ================================================================ */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
-        <div className="flex items-center justify-between gap-2 border-b border-[#2A2A2A] pb-3">
+      <section className="glass-window rounded-2xl p-5 space-y-4">
+        <div className="flex items-center justify-between gap-2 border-b border-white/12 pb-3">
           <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
             SAVED SCHEMES ({savedSchemes.length})
           </h2>
@@ -800,7 +800,7 @@ export function DashboardView() {
         </div>
 
         {savedSchemes.length > 0 ? (
-          <div className="divide-y divide-[#2A2A2A]">
+          <div className="divide-y divide-white/10">
             {savedSchemes.map((scheme) => {
               const cat = getCategoryById(scheme.categoryId);
               const alreadyTracked = applications.some((a) => a.schemeId === scheme.id);
@@ -838,7 +838,7 @@ export function DashboardView() {
                     <button
                       type="button"
                       onClick={() => openSchemeDetails(scheme.id)}
-                      className="px-3 py-1.5 text-xs font-medium text-white bg-[#252525] border border-[#353535] hover:border-[#4A4A4A] rounded-full transition-colors"
+                      className="px-3 py-1.5 text-xs font-medium text-white glass-pane glass-pane-hover rounded-full transition-colors"
                     >
                       Details
                     </button>

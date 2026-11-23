@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import 'dotenv/config';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import express, { type Request, type Response } from 'express';
@@ -78,9 +79,176 @@ function getSupabaseClient(): { client: SupabaseClient | null; configured: boole
   return { client, configured: true };
 }
 
+interface AuthUserRecord {
+  id: string;
+  fullName: string;
+  email: string;
+  district: string;
+  passwordSalt: string;
+  passwordHash: string;
+  createdAt: string;
+}
+
+interface AuthPublicUser {
+  id: string;
+  fullName: string;
+  email: string;
+  district: string;
+  isDemo?: boolean;
+}
+
+const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+const authUsersByEmail = new Map<string, AuthUserRecord>();
+const activeSessions = new Map<string, { user: AuthPublicUser; expiresAt: number }>();
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function hashPassword(password: string, saltHex?: string): { salt: string; hash: string } {
+  const salt = saltHex || crypto.randomBytes(16).toString('hex');
+  const derived = crypto.scryptSync(password, salt, 64).toString('hex');
+  return { salt, hash: derived };
+}
+
+function verifyPassword(password: string, salt: string, expectedHashHex: string): boolean {
+  const derived = crypto.scryptSync(password, salt, 64);
+  const expected = Buffer.from(expectedHashHex, 'hex');
+  if (derived.length !== expected.length) return false;
+  return crypto.timingSafeEqual(derived, expected);
+}
+
+function issueSessionToken(user: AuthPublicUser): string {
+  const nonce = crypto.randomBytes(24).toString('hex');
+  const payload = `${user.id}.${nonce}.${Date.now()}`;
+  const sig = crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('hex');
+  const token = `${payload}.${sig}`;
+  activeSessions.set(token, {
+    user,
+    expiresAt: Date.now() + 1000 * 60 * 60 * 12,
+  });
+  return token;
+}
+
+function getBearerToken(req: Request): string | null {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
+  const token = authHeader.slice(7).trim();
+  return token || null;
+}
+
+function getAuthenticatedSession(req: Request): AuthPublicUser | null {
+  const token = getBearerToken(req);
+  if (!token) return null;
+  const session = activeSessions.get(token);
+  if (!session) return null;
+  if (Date.now() > session.expiresAt) {
+    activeSessions.delete(token);
+    return null;
+  }
+  return session.user;
+}
+
 async function startServer() {
   const app = express();
   app.use(express.json({ limit: '256kb' }));
+
+  // 0. Citizen Authentication Routes (scrypt-hashed, Bearer token in memory)
+  app.post('/api/auth/signup', (req: Request, res: Response) => {
+    const fullName = sanitizeText(req.body?.fullName, 80);
+    const emailRaw = sanitizeText(req.body?.email, 120).toLowerCase();
+    const district = sanitizeText(req.body?.district, 60) || 'Kolkata';
+    const password = typeof req.body?.password === 'string' ? req.body.password : '';
+
+    if (fullName.length < 2) {
+      res.status(400).json({ error: 'Please enter your full name (at least 2 characters).' });
+      return;
+    }
+    if (!EMAIL_PATTERN.test(emailRaw)) {
+      res.status(400).json({ error: 'Please enter a valid email address.' });
+      return;
+    }
+    if (password.length < 8 || password.length > 128) {
+      res.status(400).json({ error: 'Password must be between 8 and 128 characters.' });
+      return;
+    }
+    if (authUsersByEmail.has(emailRaw)) {
+      res.status(409).json({ error: 'An account with this email already exists. Please sign in.' });
+      return;
+    }
+
+    const { salt, hash } = hashPassword(password);
+    const record: AuthUserRecord = {
+      id: `usr_${crypto.randomUUID()}`,
+      fullName,
+      email: emailRaw,
+      district,
+      passwordSalt: salt,
+      passwordHash: hash,
+      createdAt: new Date().toISOString(),
+    };
+    authUsersByEmail.set(emailRaw, record);
+
+    const publicUser: AuthPublicUser = {
+      id: record.id,
+      fullName: record.fullName,
+      email: record.email,
+      district: record.district,
+    };
+    const token = issueSessionToken(publicUser);
+    res.status(201).json({ token, user: publicUser });
+  });
+
+  app.post('/api/auth/login', (req: Request, res: Response) => {
+    const emailRaw = sanitizeText(req.body?.email, 120).toLowerCase();
+    const password = typeof req.body?.password === 'string' ? req.body.password : '';
+
+    if (!EMAIL_PATTERN.test(emailRaw) || !password) {
+      res.status(400).json({ error: 'Please enter both email and password.' });
+      return;
+    }
+
+    const record = authUsersByEmail.get(emailRaw);
+    if (!record || !verifyPassword(password, record.passwordSalt, record.passwordHash)) {
+      res.status(401).json({ error: 'Invalid email or password.' });
+      return;
+    }
+
+    const publicUser: AuthPublicUser = {
+      id: record.id,
+      fullName: record.fullName,
+      email: record.email,
+      district: record.district,
+    };
+    const token = issueSessionToken(publicUser);
+    res.json({ token, user: publicUser });
+  });
+
+  app.post('/api/auth/demo', (_req: Request, res: Response) => {
+    const publicUser: AuthPublicUser = {
+      id: `demo_${crypto.randomUUID()}`,
+      fullName: 'Ananya Chatterjee',
+      email: 'citizen.demo@schemesaathi.wb.in',
+      district: 'South 24 Parganas',
+      isDemo: true,
+    };
+    const token = issueSessionToken(publicUser);
+    res.json({ token, user: publicUser });
+  });
+
+  app.get('/api/auth/me', (req: Request, res: Response) => {
+    const user = getAuthenticatedSession(req);
+    if (!user) {
+      res.status(401).json({ error: 'Unauthorized' });
+      return;
+    }
+    res.json({ user });
+  });
+
+  app.post('/api/auth/logout', (req: Request, res: Response) => {
+    const token = getBearerToken(req);
+    if (token) {
+      activeSessions.delete(token);
+    }
+    res.json({ ok: true });
+  });
 
   // 1. Database Health & Configuration Check
   app.get('/api/db/health', async (_req: Request, res: Response) => {

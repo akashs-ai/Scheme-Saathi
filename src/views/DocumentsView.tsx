@@ -67,7 +67,7 @@ export function DocumentsView() {
               className={`px-3.5 py-1.5 rounded-full text-xs font-medium capitalize border transition-colors ${
                 filterMode === mode
                   ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
-                  : 'bg-[#1D1D1D] text-[#D4D4D4] border-[#303030] hover:text-white'
+                  : 'glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white'
               }`}
             >
               {mode}
@@ -78,14 +78,14 @@ export function DocumentsView() {
 
       {/* Privacy & Progress Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <div className="lg:col-span-5 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-3">
+        <div className="lg:col-span-5 glass-window rounded-2xl p-5 space-y-3">
           <div className="flex items-center justify-between text-xs">
             <span className="text-[#A3A3A3] font-medium">Readiness Progress</span>
             <span className="font-mono font-bold text-[#B6FF50] tabular-nums">
               {preparedCount}/{allDocs.length} ({pct}%)
             </span>
           </div>
-          <div className="h-2 w-full bg-[#252525] rounded-full overflow-hidden">
+          <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
             <div
               className="h-full bg-[#B6FF50] transition-all duration-200"
               style={{ width: `${pct}%` }}
@@ -97,7 +97,7 @@ export function DocumentsView() {
           </p>
         </div>
 
-        <div className="lg:col-span-7 bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex items-start gap-3">
+        <div className="lg:col-span-7 glass-window rounded-2xl p-5 flex items-start gap-3">
           <Lock className="w-5 h-5 text-[#B6FF50] shrink-0 mt-0.5" aria-hidden="true" />
           <div className="space-y-1">
             <p className="text-xs font-semibold text-white">Checklist Only — Zero File Uploads</p>
@@ -111,9 +111,9 @@ export function DocumentsView() {
       </div>
 
       {/* Checklist Card */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5">
+      <section className="glass-window rounded-2xl p-5">
         {filteredDocs.length > 0 ? (
-          <ul className="divide-y divide-[#2A2A2A]">
+          <ul className="divide-y divide-white/10">
             {filteredDocs.map((doc) => {
               const checked = Boolean(checkedDocuments[doc.documentName]);
               return (

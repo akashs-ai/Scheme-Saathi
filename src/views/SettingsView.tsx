@@ -38,7 +38,7 @@ export function SettingsView() {
       </div>
 
       {/* Supabase Cloud Database Sync */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+      <section className="glass-window rounded-2xl p-6 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Database className="w-4 h-4 text-[#B6FF50]" aria-hidden="true" />
@@ -51,14 +51,14 @@ export function SettingsView() {
             type="button"
             onClick={handleCheckConnection}
             disabled={checkingDb}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 text-xs font-medium text-white disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full glass-pane glass-pane-hover text-xs font-medium text-white disabled:opacity-50 transition-colors"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${checkingDb ? 'animate-spin' : ''}`} aria-hidden="true" />
             <span>{checkingDb ? 'Checking...' : 'Check Sync'}</span>
           </button>
         </div>
 
-        <div className="bg-[#252525] border border-[#353535] rounded-xl p-4 space-y-2">
+        <div className="glass-pane rounded-xl p-4 space-y-2">
           <div className="flex items-center gap-2 text-xs font-semibold">
             <span
               className={`w-2 h-2 rounded-full ${
@@ -87,7 +87,7 @@ export function SettingsView() {
       </section>
 
       {/* Language Preference */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+      <section className="glass-window rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2">
           <Globe className="w-4 h-4 text-[#B6FF50]" aria-hidden="true" />
           <h2 className="font-display text-base font-bold tracking-wider text-white uppercase">
@@ -105,7 +105,7 @@ export function SettingsView() {
             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-colors ${
               language === 'en'
                 ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50]'
-                : 'bg-[#252525] text-[#D4D4D4] border-[#353535] hover:text-white'
+                : 'glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white'
             }`}
           >
             English (EN) + Bengali Subtitles
@@ -116,7 +116,7 @@ export function SettingsView() {
             className={`px-4 py-2 rounded-full text-xs font-semibold font-bengali border transition-colors ${
               language === 'bn'
                 ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50]'
-                : 'bg-[#252525] text-[#D4D4D4] border-[#353535] hover:text-white'
+                : 'glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white'
             }`}
           >
             বাংলা শিরোনাম (Bengali Primary)
@@ -125,7 +125,7 @@ export function SettingsView() {
       </section>
 
       {/* Demo & Profile Management */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+      <section className="glass-window rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-[#FF9D2E]" aria-hidden="true" />
           <h2 className="font-display text-base font-bold tracking-wider text-white uppercase">
@@ -148,7 +148,7 @@ export function SettingsView() {
           <button
             type="button"
             onClick={loadSyntheticDemoProfile}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#252525] border border-[#FF9D2E]/50 text-xs font-medium text-[#FF9D2E] hover:bg-[#2F2F2F] transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-pane border-[#FF9D2E]/50 text-xs font-medium text-[#FF9D2E] hover:bg-white/12 transition-colors"
           >
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Load Synthetic Demo Profile</span>
@@ -157,7 +157,7 @@ export function SettingsView() {
           <button
             type="button"
             onClick={clearProfile}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#252525] border border-[#353535] text-xs font-medium text-white hover:border-[#4A4A4A] transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-pane glass-pane-hover text-xs font-medium text-white transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Clear Household Profile</span>
@@ -166,7 +166,7 @@ export function SettingsView() {
       </section>
 
       {/* Local Storage Transparency & Reset */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+      <section className="glass-window rounded-2xl p-6 space-y-4">
         <div className="flex items-center gap-2">
           <Lock className="w-4 h-4 text-[#B6FF50]" aria-hidden="true" />
           <h2 className="font-display text-base font-bold tracking-wider text-white uppercase">
@@ -175,19 +175,19 @@ export function SettingsView() {
         </div>
 
         <div className="grid grid-cols-3 gap-3 text-center">
-          <div className="bg-[#252525] border border-[#353535] rounded-xl p-3">
+          <div className="glass-pane rounded-xl p-3">
             <p className="font-mono text-xl font-bold text-white tabular-nums">
               {savedSchemeIds.length}
             </p>
             <p className="text-[11px] text-[#A3A3A3]">Saved Schemes</p>
           </div>
-          <div className="bg-[#252525] border border-[#353535] rounded-xl p-3">
+          <div className="glass-pane rounded-xl p-3">
             <p className="font-mono text-xl font-bold text-white tabular-nums">
               {applications.length}
             </p>
             <p className="text-[11px] text-[#A3A3A3]">Tracked Apps</p>
           </div>
-          <div className="bg-[#252525] border border-[#353535] rounded-xl p-3">
+          <div className="glass-pane rounded-xl p-3">
             <p className="font-mono text-xl font-bold text-white tabular-nums">
               {customFamilyMembers.length}
             </p>
@@ -203,7 +203,7 @@ export function SettingsView() {
         <button
           type="button"
           onClick={resetAllLocalData}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#252525] border border-[#E06C75]/45 text-xs font-medium text-[#E06C75] hover:bg-[#2F2022] transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-pane border-[#E06C75]/45 text-xs font-medium text-[#E06C75] hover:bg-[#E06C75]/15 transition-colors"
         >
           <Trash2 className="w-3.5 h-3.5" aria-hidden="true" />
           <span>Reset All Local Workspace Data</span>

@@ -127,7 +127,7 @@ export function SchemeExplorerView() {
 
         <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           {profile.isCompleted ? (
-            <div className="flex items-center gap-3 bg-[#1D1D1D] border border-[#303030] rounded-full pl-4 pr-2 py-1.5">
+            <div className="flex items-center gap-3 glass-pane rounded-full pl-4 pr-2 py-1.5">
               <UserCheck className="w-4 h-4 text-[#B6FF50] shrink-0" aria-hidden="true" />
               <span className="text-xs font-medium text-white tabular-nums">
                 {likelyEligibleCount} Benefit Matches
@@ -143,7 +143,7 @@ export function SchemeExplorerView() {
                 className={`px-3 py-1 text-[11px] font-semibold rounded-full transition-colors whitespace-nowrap ${
                   filters.eligibilityFilter === 'likely-eligible'
                     ? 'bg-[#B6FF50] text-[#050505]'
-                    : 'bg-[#252525] text-white hover:bg-[#303030]'
+                    : 'bg-white/10 text-white hover:bg-white/15'
                 }`}
               >
                 {filters.eligibilityFilter === 'likely-eligible' ? 'Showing Matches' : 'Filter Matches'}
@@ -175,14 +175,14 @@ export function SchemeExplorerView() {
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors whitespace-nowrap shrink-0 ${
                 isActive
                   ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
-                  : 'bg-[#1D1D1D] text-[#D4D4D4] border-[#303030] hover:border-[#4A4A4A] hover:text-white'
+                  : 'glass-pane glass-pane-hover text-[#E2E6DC] hover:text-white'
               }`}
             >
               <CategoryIcon name={cat.iconName} className="w-3.5 h-3.5" />
               <span>{language === 'bn' ? cat.bengaliName : cat.shortName}</span>
               <span
                 className={`font-mono text-[10px] tabular-nums ${
-                  isActive ? 'text-[#050505]/75' : 'text-[#737373]'
+                  isActive ? 'text-[#050505]/75' : 'text-[#A3A3A3]'
                 }`}
               >
                 {count}
@@ -195,7 +195,7 @@ export function SchemeExplorerView() {
       {/* Search & Multi-Dimensional Filters Panel */}
       <section
         aria-label="Search and filters"
-        className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-4 sm:p-5 space-y-4"
+        className="glass-window rounded-2xl p-4 sm:p-5 space-y-4"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
           {/* Search Input */}
@@ -213,7 +213,7 @@ export function SchemeExplorerView() {
               value={filters.searchQuery}
               onChange={(e) => updateFilters({ searchQuery: e.target.value })}
               placeholder="Search scheme name, Bengali title, or dept..."
-              className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-[#252525] border border-[#353535] rounded-xl text-white placeholder:text-[#737373] focus:border-[#B6FF50] focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm glass-pane rounded-xl text-white placeholder:text-[#9FA897] focus:border-[#B6FF50] focus:outline-none"
             />
           </div>
 
@@ -228,7 +228,7 @@ export function SchemeExplorerView() {
               onChange={(e) =>
                 updateFilters({ beneficiary: e.target.value as BeneficiaryGroup | 'All' })
               }
-              className="w-full px-3 py-2 text-xs sm:text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+              className="w-full px-3 py-2 text-xs sm:text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
             >
               <option value="All" className="bg-[#1D1D1D]">
                 All Beneficiaries
@@ -252,7 +252,7 @@ export function SchemeExplorerView() {
               onChange={(e) =>
                 updateFilters({ providerLevel: e.target.value as ProviderLevel | 'All' })
               }
-              className="w-full px-3 py-2 text-xs sm:text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+              className="w-full px-3 py-2 text-xs sm:text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
             >
               {PROVIDER_OPTIONS.map((opt) => (
                 <option key={opt} value={opt} className="bg-[#1D1D1D]">
@@ -275,7 +275,7 @@ export function SchemeExplorerView() {
                   eligibilityFilter: e.target.value as typeof filters.eligibilityFilter,
                 })
               }
-              className="w-full px-3 py-2 text-xs sm:text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+              className="w-full px-3 py-2 text-xs sm:text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
             >
               <option value="All" className="bg-[#1D1D1D]">
                 All Eligibility Statuses
@@ -297,13 +297,13 @@ export function SchemeExplorerView() {
         </div>
 
         {/* Status Legend & Toolbar Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#2A2A2A] text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/12 text-xs">
           <div className="flex flex-wrap items-center gap-3 text-[#A3A3A3]">
             <span className="inline-flex items-center gap-1.5 font-medium text-white tabular-nums">
               <SlidersHorizontal className="w-3.5 h-3.5 text-[#B6FF50]" aria-hidden="true" />
               {evaluatedList.length} {evaluatedList.length === 1 ? 'scheme' : 'schemes'}
             </span>
-            <span aria-hidden="true" className="text-[#404040]">
+            <span aria-hidden="true" className="text-white/25">
               ·
             </span>
             <span className="truncate max-w-md">{activeCategory.description}</span>
@@ -317,7 +317,7 @@ export function SchemeExplorerView() {
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors whitespace-nowrap ${
                 filters.savedOnly
                   ? 'border-[#B6FF50] bg-[#B6FF50] text-[#050505] font-semibold'
-                  : 'border-[#353535] bg-[#252525] text-[#D4D4D4] hover:text-white'
+                  : 'glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white'
               }`}
             >
               <Bookmark className="w-3.5 h-3.5" aria-hidden="true" />
@@ -328,7 +328,7 @@ export function SchemeExplorerView() {
               <button
                 type="button"
                 onClick={resetFilters}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#353535] bg-[#252525] text-[#D4D4D4] hover:text-white text-xs font-medium transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white text-xs font-medium transition-colors whitespace-nowrap"
               >
                 <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Reset</span>
@@ -357,7 +357,7 @@ export function SchemeExplorerView() {
           ))}
         </div>
       ) : (
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-10 text-center space-y-3">
+        <div className="glass-window rounded-2xl p-10 text-center space-y-3">
           <p className="font-display text-2xl font-bold text-white uppercase">
             No schemes match these filters
           </p>
@@ -378,7 +378,7 @@ export function SchemeExplorerView() {
               <button
                 type="button"
                 onClick={() => navigateTo('profile')}
-                className="px-4 py-2 text-xs font-medium text-white bg-[#252525] border border-[#353535] hover:border-[#4A4A4A] rounded-full transition-colors"
+                className="px-4 py-2 text-xs font-medium text-white glass-pane glass-pane-hover rounded-full transition-colors"
               >
                 Open Profile Wizard
               </button>

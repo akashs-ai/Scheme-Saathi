@@ -29,8 +29,8 @@ export class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-[#C8E3A9] p-4 sm:p-6 flex items-center justify-center">
-          <div className="max-w-md w-full bg-[#050505] border border-[#303030] rounded-[28px] p-8 text-center space-y-4 text-white">
+        <div className="min-h-screen bg-[#4a4d44] p-4 sm:p-6 flex items-center justify-center">
+          <div className="max-w-md w-full glass-window rounded-[28px] p-8 text-center space-y-4 text-white">
             <div className="flex justify-center">
               <SchemeSaathiLogo size={48} variant="lime" />
             </div>

@@ -6,15 +6,18 @@ import {
   fetchRemoteWorkspace,
   fetchSupabaseHealth,
   getOrCreateClientSessionId,
+  logoutCitizen,
   syncBookmarkToSupabase,
   syncDocumentToSupabase,
   syncFamilyMemberToSupabase,
   syncProfileToSupabase,
+  type AuthUser,
   type SyncStatusResponse,
 } from '../lib/apiClient';
 import type {
   ApplicationStage,
   ApplicationTrackerItem,
+  AppStage,
   AppView,
   CitizenProfile,
   ExplorerFilters,
@@ -91,6 +94,14 @@ const DEFAULT_FILTERS: ExplorerFilters = {
 };
 
 interface SchemeContextValue {
+  appStage: AppStage;
+  authMode: 'login' | 'signup';
+  authUser: AuthUser | null;
+  authToken: string | null;
+  enterAuth: (mode?: 'login' | 'signup') => void;
+  returnToLanding: () => void;
+  completeAuth: (token: string, user: AuthUser) => void;
+  signOut: () => Promise<void>;
   activeView: AppView;
   selectedSchemeId: string | null;
   filters: ExplorerFilters;
@@ -161,6 +172,10 @@ function loadPersistedState(): PersistedState {
 export function SchemeProvider({ children }: { children: React.ReactNode }) {
   const sessionIdRef = useRef<string>(getOrCreateClientSessionId());
   const [persisted, setPersisted] = useState<PersistedState>(() => loadPersistedState());
+  const [appStage, setAppStage] = useState<AppStage>('landing');
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('signup');
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
   const [activeView, setActiveView] = useState<AppView>('home');
   const [selectedSchemeId, setSelectedSchemeId] = useState<string | null>(null);
   const [filters, setFilters] = useState<ExplorerFilters>(DEFAULT_FILTERS);
@@ -218,6 +233,45 @@ export function SchemeProvider({ children }: { children: React.ReactNode }) {
 
   const showToast = (message: string) => {
     setToastMessage(message);
+  };
+
+  const enterAuth = (mode: 'login' | 'signup' = 'signup') => {
+    setAuthMode(mode);
+    setAppStage('auth');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const returnToLanding = () => {
+    setAppStage('landing');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const completeAuth = (token: string, user: AuthUser) => {
+    setAuthToken(token);
+    setAuthUser(user);
+    if (user.district) {
+      setPersisted((prev) => ({
+        ...prev,
+        profile: prev.profile.district
+          ? prev.profile
+          : { ...prev.profile, district: user.district },
+      }));
+    }
+    setActiveView('home');
+    setAppStage('app');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast(`Welcome, ${user.fullName}`);
+  };
+
+  const signOut = async () => {
+    const token = authToken;
+    setAuthToken(null);
+    setAuthUser(null);
+    setAppStage('auth');
+    setAuthMode('login');
+    await logoutCitizen(token);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('Signed out of SchemeSaathi');
   };
 
   const navigateTo = (view: AppView) => {
@@ -455,6 +509,14 @@ export function SchemeProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<SchemeContextValue>(
     () => ({
+      appStage,
+      authMode,
+      authUser,
+      authToken,
+      enterAuth,
+      returnToLanding,
+      completeAuth,
+      signOut,
       activeView,
       selectedSchemeId,
       filters,
@@ -489,7 +551,7 @@ export function SchemeProvider({ children }: { children: React.ReactNode }) {
       removeCustomFamilyMember,
       showToast,
     }),
-    [activeView, selectedSchemeId, filters, persisted, toastMessage, dbStatus]
+    [appStage, authMode, authUser, authToken, activeView, selectedSchemeId, filters, persisted, toastMessage, dbStatus]
   );
 
   return <SchemeContext.Provider value={value}>{children}</SchemeContext.Provider>;

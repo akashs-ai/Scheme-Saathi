@@ -44,7 +44,7 @@ export function SchemeDetailsView() {
 
   if (!scheme) {
     return (
-      <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-10 text-center space-y-4">
+      <div className="glass-window rounded-2xl p-10 text-center space-y-4">
         <h1 className="font-display text-2xl font-bold text-white uppercase">
           Scheme details unavailable
         </h1>
@@ -102,7 +102,7 @@ export function SchemeDetailsView() {
       </div>
 
       {/* Header Dossier Card */}
-      <header className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+      <header className="glass-window rounded-2xl p-6 space-y-4">
         <div className="flex flex-wrap items-center gap-2 text-xs text-[#A3A3A3]">
           <span className="font-semibold text-[#B6FF50]">{category.name}</span>
           <span aria-hidden="true">·</span>
@@ -134,7 +134,7 @@ export function SchemeDetailsView() {
 
         {/* Verification / Transition Advisory */}
         {scheme.verificationNote && (
-          <div className="bg-[#252525] border border-[#FF9D2E]/40 rounded-xl p-4 flex items-start gap-3">
+          <div className="glass-window-amber rounded-xl p-4 flex items-start gap-3">
             <AlertCircle
               className="w-4 h-4 text-[#FF9D2E] shrink-0 mt-0.5"
               aria-hidden="true"
@@ -148,7 +148,7 @@ export function SchemeDetailsView() {
 
         {/* Profile Assessment Strip */}
         {profile.isCompleted && (
-          <div className="pt-3 border-t border-[#2A2A2A] flex flex-wrap items-center gap-2 text-xs">
+          <div className="pt-3 border-t border-white/12 flex flex-wrap items-center gap-2 text-xs">
             <span className="font-semibold text-white">Your Profile Assessment:</span>
             <span
               className={`font-semibold ${
@@ -178,7 +178,7 @@ export function SchemeDetailsView() {
         {/* Left Main Content Dossier (8 cols) */}
         <div className="lg:col-span-8 space-y-5">
           {/* Overview */}
-          <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-2.5">
+          <section className="glass-window rounded-2xl p-6 space-y-2.5">
             <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
               Overview
             </h2>
@@ -186,7 +186,7 @@ export function SchemeDetailsView() {
           </section>
 
           {/* Who Can Benefit & Eligibility */}
-          <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-5">
+          <section className="glass-window rounded-2xl p-6 space-y-5">
             <div>
               <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
                 Who Can Benefit
@@ -201,7 +201,7 @@ export function SchemeDetailsView() {
               </ul>
             </div>
 
-            <div className="pt-4 border-t border-[#2A2A2A]">
+            <div className="pt-4 border-t border-white/12">
               <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
                 Eligibility Conditions
               </h2>
@@ -214,7 +214,7 @@ export function SchemeDetailsView() {
           </section>
 
           {/* Benefit Details */}
-          <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-2.5">
+          <section className="glass-window rounded-2xl p-6 space-y-2.5">
             <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
               Benefit Details
             </h2>
@@ -227,7 +227,7 @@ export function SchemeDetailsView() {
           </section>
 
           {/* Required Documents */}
-          <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-3">
+          <section className="glass-window rounded-2xl p-6 space-y-3">
             <div>
               <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
                 Required Documents
@@ -237,7 +237,7 @@ export function SchemeDetailsView() {
               </p>
             </div>
 
-            <ul className="divide-y divide-[#2A2A2A] border-t border-[#2A2A2A]">
+            <ul className="divide-y divide-white/10 border-t border-white/12">
               {scheme.requiredDocuments.map((doc) => {
                 const isChecked = Boolean(checkedDocuments[doc]);
                 return (
@@ -274,7 +274,7 @@ export function SchemeDetailsView() {
           </section>
 
           {/* How to Apply */}
-          <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
+          <section className="glass-window rounded-2xl p-6 space-y-4">
             <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
               How to Apply
             </h2>
@@ -293,12 +293,12 @@ export function SchemeDetailsView() {
 
         {/* Right Sticky Action Rail (4 cols) */}
         <aside className="lg:col-span-4 space-y-4 lg:sticky lg:top-20">
-          <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
+          <div className="glass-window rounded-2xl p-5 space-y-4">
             <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">
               Status &amp; Official Portal
             </h2>
 
-            <dl className="space-y-3 text-xs border-t border-[#2A2A2A] pt-3.5">
+            <dl className="space-y-3 text-xs border-t border-white/12 pt-3.5">
               <div>
                 <dt className="text-[#A3A3A3] flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" aria-hidden="true" />
@@ -323,7 +323,7 @@ export function SchemeDetailsView() {
                 <p className="text-[11px] text-[#A3A3A3] leading-relaxed">{scheme.deadlineNote}</p>
               )}
 
-              <div className="pt-2 border-t border-[#2A2A2A]">
+              <div className="pt-2 border-t border-white/12">
                 <dt className="text-[#A3A3A3]">Verification Status</dt>
                 <dd className={`mt-1 text-sm font-semibold ${verificationColor}`}>
                   {scheme.verificationStatus}
@@ -338,7 +338,7 @@ export function SchemeDetailsView() {
               </div>
             </dl>
 
-            <div className="space-y-2.5 pt-3 border-t border-[#2A2A2A]">
+            <div className="space-y-2.5 pt-3 border-t border-white/12">
               <a
                 href={scheme.officialSourceUrl}
                 target="_blank"
@@ -355,10 +355,10 @@ export function SchemeDetailsView() {
               <button
                 type="button"
                 onClick={() => toggleSaveScheme(scheme.id)}
-                className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium rounded-full border transition-colors ${
+                className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium rounded-full glass-pane glass-pane-hover transition-colors ${
                   saved
-                    ? 'border-[#B6FF50]/50 bg-[#252525] text-[#B6FF50]'
-                    : 'border-[#353535] bg-[#252525] text-white hover:border-[#4A4A4A]'
+                    ? 'border-[#B6FF50]/55 text-[#B6FF50]'
+                    : 'text-white'
                 }`}
               >
                 {saved ? (
@@ -377,7 +377,7 @@ export function SchemeDetailsView() {
           </div>
 
           {/* Application Tracker Panel */}
-          <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-3.5">
+          <div className="glass-window rounded-2xl p-5 space-y-3.5">
             <div className="flex items-center gap-2">
               <ClipboardList className="w-4 h-4 text-[#B6FF50]" aria-hidden="true" />
               <h3 className="font-display text-sm font-bold tracking-wider text-white uppercase">
@@ -397,7 +397,7 @@ export function SchemeDetailsView() {
                   onChange={(e) =>
                     startOrUpdateApplication(scheme.id, e.target.value as ApplicationStage)
                   }
-                  className="w-full px-3 py-2 text-xs bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3 py-2 text-xs glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
                 >
                   {TRACKER_STAGES.map((stage) => (
                     <option key={stage} value={stage} className="bg-[#1D1D1D]">
@@ -431,7 +431,7 @@ export function SchemeDetailsView() {
                 <button
                   type="button"
                   onClick={() => startOrUpdateApplication(scheme.id, 'Preparing Documents')}
-                  className="w-full px-4 py-2 text-xs font-medium text-white bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 rounded-full transition-colors"
+                  className="w-full px-4 py-2 text-xs font-medium text-white glass-pane glass-pane-hover rounded-full transition-colors"
                 >
                   Start Tracking Application
                 </button>
@@ -443,7 +443,7 @@ export function SchemeDetailsView() {
 
       {/* Related Schemes */}
       {relatedSchemes.length > 0 && (
-        <section className="pt-4 border-t border-[#222222] space-y-4">
+        <section className="pt-4 border-t border-white/12 space-y-4">
           <h2 className="font-display text-xl font-bold tracking-wide text-white uppercase">
             More in {category.name}
           </h2>

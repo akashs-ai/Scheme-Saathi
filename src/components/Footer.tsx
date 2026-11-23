@@ -5,8 +5,8 @@ export function Footer() {
   const { navigateTo, openCategoryInExplorer } = useSchemes();
 
   return (
-    <footer className="mt-12 border-t border-[#222222] pt-8 pb-20 md:pb-8">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-6 border-b border-[#1D1D1D]">
+    <footer className="mt-12 rounded-2xl glass-window p-6 sm:p-8 mb-16 md:mb-0">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-6 border-b border-white/12">
         <div className="md:col-span-5 space-y-2.5">
           <div className="flex items-center gap-2.5">
             <SchemeSaathiLogo size={28} variant="lime" />

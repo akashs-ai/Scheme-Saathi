@@ -33,7 +33,7 @@ export function SupportView() {
 
       {/* Safety & Offline Channels Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-3.5">
+        <section className="glass-window rounded-2xl p-6 space-y-3.5">
           <div className="flex items-center gap-2 text-[#B6FF50]">
             <Building2 className="w-5 h-5" aria-hidden="true" />
             <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
@@ -59,7 +59,7 @@ export function SupportView() {
           </ul>
         </section>
 
-        <section className="bg-[#1D1D1D] border border-[#FF9D2E]/40 rounded-2xl p-6 space-y-3.5">
+        <section className="glass-window-amber rounded-2xl p-6 space-y-3.5">
           <div className="flex items-center gap-2 text-[#FF9D2E]">
             <AlertTriangle className="w-5 h-5" aria-hidden="true" />
             <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase">
@@ -88,8 +88,8 @@ export function SupportView() {
       </div>
 
       {/* Verified Official Portals Directory */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-4">
-        <div className="flex items-center justify-between gap-2 border-b border-[#2A2A2A] pb-3">
+      <section className="glass-window rounded-2xl p-6 space-y-4">
+        <div className="flex items-center justify-between gap-2 border-b border-white/12 pb-3">
           <h2 className="font-display text-lg font-bold tracking-wide text-white uppercase flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#B6FF50]" aria-hidden="true" />
             <span>Official Government Portal Directory</span>
@@ -106,7 +106,7 @@ export function SupportView() {
               href={portal.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#252525] border border-[#353535] hover:border-[#B6FF50]/60 transition-colors group"
+              className="flex items-center justify-between gap-3 p-3.5 rounded-xl glass-pane glass-pane-hover transition-colors group"
             >
               <div className="min-w-0">
                 <p className="text-xs font-semibold text-white group-hover:text-[#B6FF50] truncate">

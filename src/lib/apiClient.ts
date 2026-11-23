@@ -4,6 +4,21 @@ import type {
   FamilyMember,
 } from '../types/scheme';
 
+export interface AuthUser {
+  id: string;
+  fullName: string;
+  email: string;
+  district: string;
+  isDemo?: boolean;
+}
+
+export interface AuthResult {
+  ok: boolean;
+  token?: string;
+  user?: AuthUser;
+  error?: string;
+}
+
 export interface SyncStatusResponse {
   configured: boolean;
   connected: boolean;
@@ -134,4 +149,56 @@ export async function deleteFamilyMemberFromSupabase(
     { method: 'DELETE' }
   );
   return res ?? { synced: false };
+}
+
+async function authFetch(url: string, body?: Record<string, unknown>): Promise<AuthResult> {
+  try {
+    const res = await globalThis.fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const data = (await res.json()) as { token?: string; user?: AuthUser; error?: string };
+    if (!res.ok || !data.token || !data.user) {
+      return { ok: false, error: data.error || 'Authentication failed. Please try again.' };
+    }
+    return { ok: true, token: data.token, user: data.user };
+  } catch {
+    return { ok: false, error: 'Unable to reach server. Please try again.' };
+  }
+}
+
+export async function signupCitizen(payload: {
+  fullName: string;
+  email: string;
+  district: string;
+  password: string;
+}): Promise<AuthResult> {
+  return authFetch('/api/auth/signup', payload);
+}
+
+export async function loginCitizen(payload: {
+  email: string;
+  password: string;
+}): Promise<AuthResult> {
+  return authFetch('/api/auth/login', payload);
+}
+
+export async function loginDemoCitizen(): Promise<AuthResult> {
+  return authFetch('/api/auth/demo');
+}
+
+export async function logoutCitizen(token: string | null): Promise<void> {
+  if (!token) return;
+  try {
+    await globalThis.fetch('/api/auth/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch {
+    // Ignore network errors on logout
+  }
 }

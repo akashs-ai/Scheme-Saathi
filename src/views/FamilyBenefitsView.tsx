@@ -115,7 +115,7 @@ export function FamilyBenefitsView() {
                 className={`px-3.5 py-2 rounded-full text-xs font-medium border transition-colors ${
                   active
                     ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
-                    : 'bg-[#1D1D1D] text-[#D4D4D4] border-[#303030] hover:border-[#4A4A4A] hover:text-white'
+                    : 'glass-pane glass-pane-hover text-[#E2E6DC] hover:text-white'
                 }`}
               >
                 {preset.title}
@@ -129,7 +129,7 @@ export function FamilyBenefitsView() {
             className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium border transition-colors ${
               isCustomMode
                 ? 'bg-[#FF9D2E] text-[#050505] border-[#FF9D2E] font-semibold'
-                : 'bg-[#1D1D1D] text-[#FF9D2E] border-[#FF9D2E]/40 hover:border-[#FF9D2E]'
+                : 'glass-pane text-[#FF9D2E] border-[#FF9D2E]/45 hover:border-[#FF9D2E]'
             }`}
           >
             <Plus className="w-3.5 h-3.5" aria-hidden="true" />
@@ -141,13 +141,13 @@ export function FamilyBenefitsView() {
 
         {/* Synthetic Disclosure OR Custom Builder */}
         {!isCustomMode ? (
-          <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-2.5">
+          <div className="glass-window-amber rounded-2xl p-5 space-y-2.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#FF9D2E]">
                 <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                 <span>Synthetic Demo Profile &amp; Demo Matches (Illustrative Only)</span>
               </div>
-              <span className="font-mono text-[11px] text-[#A3A3A3] tabular-nums">
+              <span className="font-mono text-[11px] text-[#C7D0BE] tabular-nums">
                 {activeSynthetic.district} · {activeSynthetic.residenceType} ·{' '}
                 {activeSynthetic.incomeLabel}
               </span>
@@ -164,8 +164,8 @@ export function FamilyBenefitsView() {
             </p>
           </div>
         ) : (
-          <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#2A2A2A] pb-3.5">
+          <div className="glass-window rounded-2xl p-5 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/12 pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-white">
                   Add Custom Household Members (Stored Locally)
@@ -180,7 +180,7 @@ export function FamilyBenefitsView() {
                   aria-label="Residence type"
                   value={customResidence}
                   onChange={(e) => setCustomResidence(e.target.value as 'Rural' | 'Urban')}
-                  className="px-3 py-1.5 bg-[#252525] border border-[#353535] rounded-lg text-white"
+                  className="px-3 py-1.5 glass-pane rounded-lg text-white"
                 >
                   <option value="Rural" className="bg-[#1D1D1D]">Rural</option>
                   <option value="Urban" className="bg-[#1D1D1D]">Urban</option>
@@ -189,7 +189,7 @@ export function FamilyBenefitsView() {
                   aria-label="Income bracket"
                   value={customIncome}
                   onChange={(e) => setCustomIncome(e.target.value as Exclude<IncomeRange, ''>)}
-                  className="px-3 py-1.5 bg-[#252525] border border-[#353535] rounded-lg text-white"
+                  className="px-3 py-1.5 glass-pane rounded-lg text-white"
                 >
                   <option value="below-1l" className="bg-[#1D1D1D]">Below ₹1L / yr</option>
                   <option value="1l-2.5l" className="bg-[#1D1D1D]">₹1L – ₹2.5L / yr</option>
@@ -207,21 +207,21 @@ export function FamilyBenefitsView() {
                   value={memberName}
                   onChange={(e) => setMemberName(e.target.value)}
                   placeholder="Member label (e.g. Mother) *"
-                  className="px-3 py-2 text-xs bg-[#252525] border border-[#353535] rounded-xl text-white placeholder:text-[#737373] focus:border-[#B6FF50] focus:outline-none"
+                  className="px-3 py-2 text-xs glass-pane rounded-xl text-white placeholder:text-[#9FA897] focus:border-[#B6FF50] focus:outline-none"
                 />
                 <input
                   type="text"
                   value={memberRelation}
                   onChange={(e) => setMemberRelation(e.target.value)}
                   placeholder="Role (e.g. Farmer, Student)"
-                  className="px-3 py-2 text-xs bg-[#252525] border border-[#353535] rounded-xl text-white placeholder:text-[#737373] focus:border-[#B6FF50] focus:outline-none"
+                  className="px-3 py-2 text-xs glass-pane rounded-xl text-white placeholder:text-[#9FA897] focus:border-[#B6FF50] focus:outline-none"
                 />
                 <input
                   type="text"
                   value={memberAge}
                   onChange={(e) => setMemberAge(e.target.value)}
                   placeholder="Age note (e.g. 64 yrs)"
-                  className="px-3 py-2 text-xs bg-[#252525] border border-[#353535] rounded-xl text-white placeholder:text-[#737373] focus:border-[#B6FF50] focus:outline-none"
+                  className="px-3 py-2 text-xs glass-pane rounded-xl text-white placeholder:text-[#9FA897] focus:border-[#B6FF50] focus:outline-none"
                 />
               </div>
 
@@ -237,7 +237,7 @@ export function FamilyBenefitsView() {
                       className={`px-3 py-1.5 text-[11px] font-medium rounded-full border transition-colors ${
                         selected
                           ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
-                          : 'bg-[#252525] text-[#D4D4D4] border-[#353535] hover:border-[#4A4A4A]'
+                          : 'glass-pane glass-pane-hover text-[#D4D4D4]'
                       }`}
                     >
                       {opt.label}
@@ -261,7 +261,7 @@ export function FamilyBenefitsView() {
 
       {/* Member Cards */}
       {memberMatches.length === 0 ? (
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-10 text-center space-y-2">
+        <div className="glass-window rounded-2xl p-10 text-center space-y-2">
           <Users className="w-8 h-8 text-[#737373] mx-auto" aria-hidden="true" />
           <p className="font-display text-xl font-bold text-white uppercase">
             Add your first household member above
@@ -276,9 +276,9 @@ export function FamilyBenefitsView() {
           {memberMatches.map(({ member, matches }) => (
             <section
               key={member.id}
-              className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 space-y-4"
+              className="glass-window rounded-2xl p-5 space-y-4"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#2A2A2A] pb-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/12 pb-3.5">
                 <div>
                   <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#A3A3A3]">
                     <span className="font-semibold text-[#B6FF50]">{member.relation}</span>
@@ -304,7 +304,7 @@ export function FamilyBenefitsView() {
                       type="button"
                       onClick={() => removeCustomFamilyMember(member.id)}
                       aria-label={`Remove ${member.name}`}
-                      className="p-2 text-[#737373] hover:text-[#E06C75] rounded-full hover:bg-[#252525]"
+                      className="p-2 text-[#A3A3A3] hover:text-[#E06C75] rounded-full hover:bg-white/10"
                     >
                       <Trash2 className="w-4 h-4" aria-hidden="true" />
                     </button>
@@ -319,7 +319,7 @@ export function FamilyBenefitsView() {
                   return (
                     <div
                       key={scheme.id}
-                      className="bg-[#252525] border border-[#353535] hover:border-[#4A4A4A] rounded-xl p-4 flex flex-col justify-between transition-colors"
+                      className="glass-pane glass-pane-hover rounded-xl p-4 flex flex-col justify-between transition-colors"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-2 text-[10px]">
@@ -353,7 +353,7 @@ export function FamilyBenefitsView() {
                         </p>
                       </div>
 
-                      <div className="mt-3.5 pt-2.5 border-t border-[#323232] flex items-center justify-between gap-2">
+                      <div className="mt-3.5 pt-2.5 border-t border-white/12 flex items-center justify-between gap-2">
                         <button
                           type="button"
                           onClick={() => openSchemeDetails(scheme.id)}

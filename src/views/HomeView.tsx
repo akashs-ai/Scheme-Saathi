@@ -55,7 +55,7 @@ export function HomeView() {
           <button
             type="button"
             onClick={() => navigateTo('dashboard')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#1D1D1D] border border-[#303030] hover:border-[#B6FF50]/50 text-xs font-medium text-white transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full glass-pane glass-pane-hover text-xs font-medium text-white transition-colors whitespace-nowrap"
           >
             <LayoutDashboard className="w-3.5 h-3.5 text-[#B6FF50]" aria-hidden="true" />
             <span>Open Full Dashboard</span>
@@ -63,7 +63,7 @@ export function HomeView() {
           <button
             type="button"
             onClick={() => navigateTo('family')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#1D1D1D] border border-[#303030] hover:border-[#4A4A4A] text-xs font-medium text-[#A3A3A3] hover:text-white transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full glass-pane glass-pane-hover text-xs font-medium text-[#D6DCD0] hover:text-white transition-colors whitespace-nowrap"
           >
             <Users className="w-3.5 h-3.5 text-[#FF9D2E]" aria-hidden="true" />
             <span>Family Mode</span>
@@ -72,9 +72,9 @@ export function HomeView() {
       </div>
 
       {/* ================================================================ */}
-      {/* 1. COMPACT DARK HERO CARD                                        */}
+      {/* 1. COMPACT GLASS HERO CARD                                       */}
       {/* ================================================================ */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+      <section className="glass-window rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
         <div className="lg:col-span-7 p-6 sm:p-7 lg:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-[11px] font-medium text-[#B6FF50]">
@@ -106,7 +106,7 @@ export function HomeView() {
               <button
                 type="button"
                 onClick={() => openCategoryInExplorer('all')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-medium text-white bg-[#252525] hover:bg-[#303030] border border-[#383838] rounded-full transition-colors whitespace-nowrap shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-medium text-white glass-pane glass-pane-hover rounded-full transition-colors whitespace-nowrap shrink-0"
               >
                 <span>Explore All Schemes</span>
               </button>
@@ -123,7 +123,7 @@ export function HomeView() {
         </div>
 
         {/* Framed Documentary Family Scene */}
-        <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full bg-[#141414] border-t lg:border-t-0 lg:border-l border-[#303030]">
+        <div className="lg:col-span-5 relative min-h-[220px] lg:min-h-full bg-black/20 border-t lg:border-t-0 lg:border-l border-white/15">
           {!heroImgFailed ? (
             <>
               <img
@@ -152,11 +152,11 @@ export function HomeView() {
       </section>
 
       {/* ================================================================ */}
-      {/* 2. FOUR DARK DASHBOARD STATISTIC PANELS                          */}
+      {/* 2. FOUR GLASS DASHBOARD STATISTIC PANELS                         */}
       {/* ================================================================ */}
       <section aria-label="Platform statistics" className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Stat 1: Total Schemes */}
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+        <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="font-display text-xs font-bold tracking-wider text-[#A3A3A3] uppercase">
               Total Schemes
@@ -174,7 +174,7 @@ export function HomeView() {
               {verifyAttentionCount} review
             </span>
           </div>
-          <div className="mt-3 h-1.5 w-full bg-[#252525] rounded-full overflow-hidden flex">
+          <div className="mt-3 h-1.5 w-full bg-white/10 rounded-full overflow-hidden flex">
             <div
               className="h-full bg-[#B6FF50]"
               style={{ width: `${Math.round((verifiedCount / SCHEMES.length) * 100)}%` }}
@@ -188,7 +188,7 @@ export function HomeView() {
         </div>
 
         {/* Stat 2: Benefit Categories */}
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+        <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="font-display text-xs font-bold tracking-wider text-[#A3A3A3] uppercase">
               Benefit Categories
@@ -215,7 +215,7 @@ export function HomeView() {
         </div>
 
         {/* Stat 3: District Coverage */}
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+        <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="font-display text-xs font-bold tracking-wider text-[#A3A3A3] uppercase">
               District Coverage
@@ -234,7 +234,7 @@ export function HomeView() {
         </div>
 
         {/* Stat 4: Privacy Protection */}
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between">
+        <div className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="font-display text-xs font-bold tracking-wider text-[#A3A3A3] uppercase">
               Privacy Protection
@@ -290,10 +290,10 @@ export function HomeView() {
                 key={category.id}
                 type="button"
                 onClick={() => openCategoryInExplorer(category.id)}
-                className={`group text-left p-4.5 rounded-2xl border transition-all duration-150 flex flex-col justify-between hover:-translate-y-0.5 ${
+                className={`group text-left p-4.5 rounded-2xl transition-all duration-150 flex flex-col justify-between hover:-translate-y-0.5 ${
                   isAll
-                    ? 'bg-[#232933] border-[#B6FF50]/45 hover:border-[#B6FF50]'
-                    : 'bg-[#1D1D1D] border-[#303030] hover:border-[#4A4A4A] hover:bg-[#222222]'
+                    ? 'glass-window-lime hover:border-[#B6FF50]'
+                    : 'glass-window glass-window-hover'
                 }`}
               >
                 <div>
@@ -302,7 +302,7 @@ export function HomeView() {
                       className={`inline-flex items-center justify-center w-9 h-9 rounded-xl border ${
                         isAll
                           ? 'bg-[#B6FF50] border-[#B6FF50] text-[#050505]'
-                          : 'bg-[#252525] border-[#353535] text-white group-hover:border-[#B6FF50]/50 group-hover:text-[#B6FF50] transition-colors'
+                          : 'glass-pane text-white group-hover:border-[#B6FF50]/50 group-hover:text-[#B6FF50] transition-colors'
                       }`}
                     >
                       <CategoryIcon name={category.iconName} className="w-4 h-4" />
@@ -336,7 +336,7 @@ export function HomeView() {
                   </p>
                 </div>
 
-                <div className="mt-3.5 pt-2.5 border-t border-[#2C2C2C] flex items-center justify-between text-[11px] font-medium">
+                <div className="mt-3.5 pt-2.5 border-t border-white/12 flex items-center justify-between text-[11px] font-medium">
                   <span className={isAll ? 'text-[#B6FF50]' : 'text-white/80 group-hover:text-[#B6FF50]'}>
                     Browse category
                   </span>
@@ -356,8 +356,8 @@ export function HomeView() {
       {/* ================================================================ */}
       {/* 4. BENEFITS FOR YOUR FAMILY SPOTLIGHT PANEL                      */}
       {/* ================================================================ */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
-        <div className="lg:col-span-5 relative min-h-[200px] bg-[#141414]">
+      <section className="glass-window rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        <div className="lg:col-span-5 relative min-h-[200px] bg-black/20">
           {!familyImgFailed ? (
             <>
               <img
@@ -367,7 +367,7 @@ export function HomeView() {
                 onError={() => setFamilyImgFailed(true)}
                 className="w-full h-full object-cover opacity-85"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1D1D1D]/20 to-[#1D1D1D]/90 hidden lg:block" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#141A12]/25 to-[#141A12]/80 hidden lg:block" />
             </>
           ) : (
             <div className="w-full h-full flex items-center justify-center p-6">
@@ -398,7 +398,7 @@ export function HomeView() {
               ].map((item) => (
                 <div
                   key={item.role}
-                  className="bg-[#252525] border border-[#303030] rounded-xl p-3 flex items-start gap-2.5"
+                  className="glass-pane rounded-xl p-3 flex items-start gap-2.5"
                 >
                   <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${item.accent}`} />
                   <div>
@@ -410,7 +410,7 @@ export function HomeView() {
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-[#2A2A2A] flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-5 pt-4 border-t border-white/12 flex flex-wrap items-center justify-between gap-3">
             <span className="text-[11px] text-[#A3A3A3]">
               Demo households are clearly marked synthetic. Add custom members anytime.
             </span>

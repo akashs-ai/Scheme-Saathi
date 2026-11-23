@@ -241,6 +241,8 @@ export interface ApplicationTrackerItem {
   note: string;
 }
 
+export type AppStage = 'landing' | 'auth' | 'app';
+
 export type AppView =
   | 'home'
   | 'dashboard'

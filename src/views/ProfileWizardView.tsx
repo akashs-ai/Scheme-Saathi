@@ -124,7 +124,7 @@ export function ProfileWizardView() {
           <button
             type="button"
             onClick={handleLoadDemo}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-[#FF9D2E] bg-[#1D1D1D] border border-[#303030] hover:border-[#FF9D2E]/60 rounded-full transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-[#FF9D2E] glass-pane glass-pane-hover rounded-full transition-colors whitespace-nowrap"
           >
             <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Load Synthetic Demo</span>
@@ -133,7 +133,7 @@ export function ProfileWizardView() {
             <button
               type="button"
               onClick={handleClear}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-[#A3A3A3] hover:text-white bg-[#1D1D1D] border border-[#303030] rounded-full transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-[#D4D4D4] hover:text-white glass-pane glass-pane-hover rounded-full transition-colors whitespace-nowrap"
             >
               <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Clear</span>
@@ -143,7 +143,7 @@ export function ProfileWizardView() {
       </div>
 
       {/* Privacy Notice */}
-      <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl px-4 py-3 flex items-start gap-3">
+      <div className="glass-window rounded-2xl px-4 py-3 flex items-start gap-3">
         <Lock className="w-4 h-4 text-[#B6FF50] shrink-0 mt-0.5" aria-hidden="true" />
         <p className="text-xs text-[#A3A3A3] leading-relaxed">
           <span className="font-semibold text-white">Privacy Protection:</span> Stored strictly in
@@ -166,8 +166,8 @@ export function ProfileWizardView() {
                 isCurrent
                   ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
                   : isCompleted
-                  ? 'bg-[#1D1D1D] text-[#B6FF50] border-[#B6FF50]/35 hover:bg-[#252525]'
-                  : 'bg-[#1D1D1D] text-[#A3A3A3] border-[#303030] hover:text-white hover:bg-[#252525]'
+                  ? 'glass-pane glass-pane-hover text-[#B6FF50] border-[#B6FF50]/35'
+                  : 'glass-pane glass-pane-hover text-[#D4D4D4] hover:text-white'
               }`}
             >
               {label}
@@ -177,7 +177,7 @@ export function ProfileWizardView() {
       </nav>
 
       {/* Main Step Card */}
-      <section className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-6 space-y-6">
+      <section className="glass-window rounded-2xl p-6 space-y-6">
         {/* STEP 1 */}
         {step === 0 && (
           <div className="space-y-5">
@@ -200,7 +200,7 @@ export function ProfileWizardView() {
                   id="wizard-age"
                   value={draft.ageRange}
                   onChange={(e) => updateDraft({ ageRange: e.target.value as AgeRange })}
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
                 >
                   <option value="" className="bg-[#1D1D1D]">Select age range</option>
                   {AGE_RANGES.map((age) => (
@@ -219,7 +219,7 @@ export function ProfileWizardView() {
                   id="wizard-district"
                   value={draft.district}
                   onChange={(e) => updateDraft({ district: e.target.value })}
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
                 >
                   <option value="" className="bg-[#1D1D1D]">Select district</option>
                   {WEST_BENGAL_DISTRICTS.map((dist) => (
@@ -243,7 +243,7 @@ export function ProfileWizardView() {
                       className={`py-2.5 px-3 text-xs font-semibold rounded-xl border transition-colors ${
                         draft.residenceType === type
                           ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50]'
-                          : 'bg-[#252525] text-[#D4D4D4] border-[#353535] hover:border-[#4A4A4A]'
+                          : 'glass-pane glass-pane-hover text-[#D4D4D4]'
                       }`}
                     >
                       {type}
@@ -265,7 +265,7 @@ export function ProfileWizardView() {
                   onChange={(e) =>
                     updateDraft({ familySize: Math.max(1, Number(e.target.value) || 1) })
                   }
-                  className="w-full px-3.5 py-2.5 text-sm font-mono tabular-nums bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-sm font-mono tabular-nums glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
                 />
               </div>
 
@@ -277,7 +277,7 @@ export function ProfileWizardView() {
                   id="wizard-income"
                   value={draft.incomeRange}
                   onChange={(e) => updateDraft({ incomeRange: e.target.value as IncomeRange })}
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
                 >
                   <option value="" className="bg-[#1D1D1D]">
                     Prefer not to specify / check broad eligibility
@@ -325,7 +325,7 @@ export function ProfileWizardView() {
                     hasWomenInHousehold: val === 'Homemaker' ? true : draft.hasWomenInHousehold,
                   });
                 }}
-                className="w-full px-3.5 py-2.5 text-sm bg-[#252525] border border-[#353535] rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
+                className="w-full px-3.5 py-2.5 text-sm glass-pane rounded-xl text-white focus:border-[#B6FF50] focus:outline-none"
               >
                 <option value="" className="bg-[#1D1D1D]">Select occupation or life stage</option>
                 {EMPLOYMENT_OPTIONS.map((opt) => (
@@ -386,10 +386,10 @@ export function ProfileWizardView() {
                     type="button"
                     onClick={() => updateDraft({ [item.key]: !active })}
                     aria-pressed={active}
-                    className={`text-left p-4 rounded-xl border transition-colors ${
+                    className={`text-left p-4 rounded-xl glass-pane glass-pane-hover transition-colors ${
                       active
-                        ? 'border-[#B6FF50] bg-[#252525]'
-                        : 'border-[#303030] bg-[#181818] hover:border-[#454545]'
+                        ? 'border-[#B6FF50] bg-white/[0.12]'
+                        : ''
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
@@ -423,14 +423,14 @@ export function ProfileWizardView() {
             </div>
 
             {!hasConditionalSection && (
-              <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl text-xs text-[#A3A3A3]">
+              <div className="p-4 glass-pane rounded-xl text-xs text-[#A3A3A3]">
                 No extra conditional fields required. Continue to Review &amp; Match or return to
                 Step 2 to select specific household roles.
               </div>
             )}
 
             {(draft.isStudent || draft.employmentStatus === 'Student') && (
-              <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl space-y-3">
+              <div className="p-4 glass-pane rounded-xl space-y-3">
                 <h3 className="text-xs font-semibold text-[#B6FF50] uppercase tracking-wider">
                   Education Details (Student Selected)
                 </h3>
@@ -447,7 +447,7 @@ export function ProfileWizardView() {
                           studentLevel: e.target.value as CitizenProfile['studentLevel'],
                         })
                       }
-                      className="w-full px-3 py-2 text-xs bg-[#1D1D1D] border border-[#383838] rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
+                      className="w-full px-3 py-2 text-xs glass-pane rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
                     >
                       <option value="" className="bg-[#1D1D1D]">Select study level</option>
                       <option value="Class 5–10" className="bg-[#1D1D1D]">Class 5–10 (Pre-Matric)</option>
@@ -457,7 +457,7 @@ export function ProfileWizardView() {
                     </select>
                   </div>
                   <div className="flex items-end">
-                    <label className="flex items-center gap-2.5 text-xs text-[#D4D4D4] p-2.5 bg-[#1D1D1D] border border-[#383838] rounded-lg w-full">
+                    <label className="flex items-center gap-2.5 text-xs text-[#D4D4D4] p-2.5 glass-pane rounded-lg w-full">
                       <input
                         type="checkbox"
                         checked={draft.studentMerit60Plus}
@@ -473,7 +473,7 @@ export function ProfileWizardView() {
 
             {(draft.hasFarmerInFamily ||
               draft.employmentStatus === 'Farmer / Agricultural Worker') && (
-              <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl space-y-3">
+              <div className="p-4 glass-pane rounded-xl space-y-3">
                 <h3 className="text-xs font-semibold text-[#B6FF50] uppercase tracking-wider">
                   Agricultural Details (Farmer Selected)
                 </h3>
@@ -491,7 +491,7 @@ export function ProfileWizardView() {
                       className={`p-3 text-left text-xs font-medium rounded-lg border transition-colors ${
                         draft.farmerLandType === landOpt
                           ? 'bg-[#B6FF50] text-[#050505] border-[#B6FF50] font-semibold'
-                          : 'bg-[#1D1D1D] text-white border-[#383838] hover:border-[#4A4A4A]'
+                          : 'glass-pane glass-pane-hover text-white'
                       }`}
                     >
                       {landOpt}
@@ -502,7 +502,7 @@ export function ProfileWizardView() {
             )}
 
             {draft.hasWomenInHousehold && (
-              <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl space-y-2.5">
+              <div className="p-4 glass-pane rounded-xl space-y-2.5">
                 <h3 className="text-xs font-semibold text-[#B6FF50] uppercase tracking-wider">
                   Women &amp; Girls Context
                 </h3>
@@ -514,7 +514,7 @@ export function ProfileWizardView() {
                       womenAgeBracket: e.target.value as CitizenProfile['womenAgeBracket'],
                     })
                   }
-                  className="w-full px-3 py-2 text-xs bg-[#1D1D1D] border border-[#383838] rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
+                  className="w-full px-3 py-2 text-xs glass-pane rounded-lg text-white focus:border-[#B6FF50] focus:outline-none"
                 >
                   <option value="" className="bg-[#1D1D1D]">Select age bracket</option>
                   <option value="13–19 (Unmarried Girl)" className="bg-[#1D1D1D]">
@@ -534,7 +534,7 @@ export function ProfileWizardView() {
             )}
 
             {draft.hasSeniorCitizen && (
-              <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl space-y-2">
+              <div className="p-4 glass-pane rounded-xl space-y-2">
                 <h3 className="text-xs font-semibold text-[#B6FF50] uppercase tracking-wider">
                   Senior Citizen Age Detail
                 </h3>
@@ -553,7 +553,7 @@ export function ProfileWizardView() {
               </div>
             )}
 
-            <div className="p-4 bg-[#252525] border border-[#353535] rounded-xl space-y-2.5">
+            <div className="p-4 glass-pane rounded-xl space-y-2.5">
               <h3 className="text-xs font-semibold text-white uppercase tracking-wider">
                 Skills &amp; Business Goals (Optional)
               </h3>
@@ -602,7 +602,7 @@ export function ProfileWizardView() {
               </div>
             </div>
 
-            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs border-t border-b border-[#2A2A2A] py-4">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs border-t border-b border-white/12 py-4">
               <div>
                 <dt className="text-[#A3A3A3]">Location &amp; Area</dt>
                 <dd className="mt-0.5 font-medium text-white">
@@ -631,7 +631,7 @@ export function ProfileWizardView() {
               <button
                 type="button"
                 onClick={() => handleFinish('dashboard')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-medium text-white bg-[#252525] border border-[#353535] hover:border-[#4A4A4A] rounded-full transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-medium text-white glass-pane glass-pane-hover rounded-full transition-colors"
               >
                 <span>Save &amp; Open Dashboard</span>
               </button>
@@ -640,12 +640,12 @@ export function ProfileWizardView() {
         )}
 
         {/* Footer Step Controls */}
-        <div className="pt-4 border-t border-[#2A2A2A] flex items-center justify-between gap-4">
+        <div className="pt-4 border-t border-white/12 flex items-center justify-between gap-4">
           <button
             type="button"
             disabled={step === 0}
             onClick={() => setStep((s) => Math.max(0, s - 1))}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-white bg-[#252525] border border-[#353535] rounded-full hover:border-[#4A4A4A] disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-white glass-pane glass-pane-hover rounded-full disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Previous</span>

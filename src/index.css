@@ -21,15 +21,52 @@
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    background-color: #C8E3A9;
+    background-color: #4a4d44;
     color: #FFFFFF;
     color-scheme: dark;
   }
 
   body {
-    background-color: #C8E3A9;
+    background-color: #4a4d44;
     color: #FFFFFF;
     overflow-x: hidden;
+  }
+
+  .shader-frame {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+
+  .ui-overlay-main {
+    pointer-events: none;
+  }
+
+  .ui-overlay-main > div > div > *,
+  .ui-overlay-main footer,
+  .ui-overlay-main a,
+  .ui-overlay-main button,
+  .ui-overlay-main input,
+  .ui-overlay-main select,
+  .ui-overlay-main textarea,
+  .ui-overlay-main form,
+  .ui-overlay-main section {
+    pointer-events: auto;
+  }
+
+  .ui-overlay-main h1,
+  .ui-overlay-main > div > div > section > div:first-child h2 {
+    text-shadow: 0 2px 10px rgba(10, 14, 10, 0.55);
+  }
+
+  .ui-overlay-main > div > div > div:first-child p,
+  .ui-overlay-main > div > div > section > div:first-child p {
+    color: #E2E6DC;
+    text-shadow: 0 1px 6px rgba(10, 14, 10, 0.65);
   }
 
   .font-display {
@@ -72,6 +109,105 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #484848;
+  }
+}
+
+@layer components {
+  .glass-window {
+    background: linear-gradient(
+      145deg,
+      rgba(22, 28, 19, 0.54) 0%,
+      rgba(13, 18, 11, 0.4) 100%
+    );
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.26),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 16px 40px rgba(5, 8, 5, 0.26);
+  }
+
+  .glass-window-hover {
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .glass-window-hover:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(28, 36, 24, 0.6) 0%,
+      rgba(16, 22, 14, 0.46) 100%
+    );
+    border-color: rgba(182, 255, 80, 0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.34),
+      inset 0 0 0 1px rgba(182, 255, 80, 0.08),
+      0 20px 44px rgba(5, 8, 5, 0.34);
+  }
+
+  .glass-window-lime {
+    background: linear-gradient(
+      145deg,
+      rgba(34, 46, 26, 0.56) 0%,
+      rgba(17, 25, 13, 0.42) 100%
+    );
+    backdrop-filter: blur(20px) saturate(155%);
+    -webkit-backdrop-filter: blur(20px) saturate(155%);
+    border: 1px solid rgba(182, 255, 80, 0.44);
+    box-shadow:
+      inset 0 1px 0 rgba(215, 255, 150, 0.3),
+      inset 0 0 0 1px rgba(182, 255, 80, 0.08),
+      0 18px 42px rgba(5, 8, 5, 0.28);
+  }
+
+  .glass-window-amber {
+    background: linear-gradient(
+      145deg,
+      rgba(44, 34, 20, 0.56) 0%,
+      rgba(24, 18, 12, 0.42) 100%
+    );
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 157, 46, 0.46);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 210, 150, 0.26),
+      inset 0 0 0 1px rgba(255, 157, 46, 0.06),
+      0 16px 38px rgba(5, 8, 5, 0.26);
+  }
+
+  .glass-pane {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px) saturate(135%);
+    -webkit-backdrop-filter: blur(12px) saturate(135%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-pane-hover {
+    transition:
+      background 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .glass-pane-hover:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(182, 255, 80, 0.48);
+  }
+
+  .glass-bar {
+    background: linear-gradient(
+      180deg,
+      rgba(24, 30, 21, 0.56) 0%,
+      rgba(16, 21, 14, 0.42) 100%
+    );
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
 }
 

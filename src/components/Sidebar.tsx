@@ -33,7 +33,7 @@ export function Sidebar() {
   return (
     <aside
       aria-label="Workspace sidebar"
-      className="hidden md:flex flex-col items-center justify-between py-6 px-3.5 border-r border-[#1C1C1C] shrink-0 w-[72px]"
+      className="hidden md:flex flex-col items-center justify-between py-6 px-3.5 glass-bar border-r border-white/15 shrink-0 w-[72px] pointer-events-auto"
     >
       {/* Top Vertical Circular Icon Buttons */}
       <div className="flex flex-col items-center gap-3">
@@ -52,7 +52,7 @@ export function Sidebar() {
                 className={`relative w-11 h-11 rounded-full border inline-flex items-center justify-center transition-all duration-150 ${
                   isActive
                     ? 'bg-[#B6FF50] border-[#B6FF50] text-[#050505]'
-                    : 'bg-[#1D1D1D] border-[#303030] text-[#A3A3A3] hover:bg-[#252525] hover:border-[#4A4A4A] hover:text-white'
+                    : 'glass-pane glass-pane-hover text-[#C7D0BE] hover:text-white'
                 }`}
               >
                 <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
@@ -66,7 +66,7 @@ export function Sidebar() {
               {/* Crisp Hover Tooltip */}
               <div
                 role="tooltip"
-                className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg bg-[#252525] border border-[#3A3A3A] text-white text-[11px] font-medium whitespace-nowrap shadow-xl"
+                className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg glass-window text-white text-[11px] font-medium whitespace-nowrap"
               >
                 {item.label}
               </div>
@@ -84,14 +84,14 @@ export function Sidebar() {
           className={`w-11 h-11 rounded-full border inline-flex items-center justify-center transition-all duration-150 ${
             activeView === 'profile'
               ? 'bg-[#B6FF50] border-[#B6FF50] text-[#050505]'
-              : 'bg-[#1D1D1D] border-[#303030] text-white hover:bg-[#252525] hover:border-[#B6FF50] hover:text-[#B6FF50]'
+              : 'glass-pane glass-pane-hover text-white hover:text-[#B6FF50]'
           }`}
         >
           <Plus className="w-5 h-5" aria-hidden="true" />
         </button>
         <div
           role="tooltip"
-          className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg bg-[#252525] border border-[#3A3A3A] text-white text-[11px] font-medium whitespace-nowrap shadow-xl"
+          className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg glass-window text-white text-[11px] font-medium whitespace-nowrap"
         >
           Check Benefits Wizard
         </div>
@@ -114,7 +114,7 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label="Mobile bottom navigation"
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#050505]/95 backdrop-blur-md border-t border-[#262626] px-2 py-2"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 glass-bar border-t border-white/15 px-2 py-2 pointer-events-auto"
     >
       <div className="grid grid-cols-5 gap-1">
         {items.map((item) => {
@@ -128,7 +128,7 @@ export function MobileBottomNav() {
               type="button"
               onClick={() => navigateTo(item.view)}
               className={`flex flex-col items-center justify-center py-1.5 rounded-xl transition-colors ${
-                isActive ? 'text-[#B6FF50] bg-[#1D1D1D]' : 'text-[#A3A3A3] hover:text-white'
+                isActive ? 'text-[#B6FF50] glass-pane' : 'text-[#C7D0BE] hover:text-white'
               }`}
             >
               <Icon className="w-4 h-4" aria-hidden="true" />

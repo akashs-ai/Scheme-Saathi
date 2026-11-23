@@ -94,7 +94,7 @@ export function SchemeCard({ scheme, evaluation, matchContextNote }: SchemeCardP
   }
 
   return (
-    <article className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-5 flex flex-col justify-between transition-all duration-150 hover:border-[#4A4A4A] hover:-translate-y-0.5">
+    <article className="glass-window glass-window-hover rounded-2xl p-5 flex flex-col justify-between hover:-translate-y-0.5">
       <div>
         {/* Top Metadata Line (Category · Provider | Status Indicator) */}
         <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#A3A3A3]">
@@ -134,13 +134,13 @@ export function SchemeCard({ scheme, evaluation, matchContextNote }: SchemeCardP
 
         {/* Optional Match Reason Strip */}
         {matchContextNote && (
-          <p className="mt-2.5 text-[11px] font-medium text-[#B6FF50] bg-[#252525] border border-[#303030] px-3 py-1.5 rounded-xl">
+          <p className="mt-2.5 text-[11px] font-medium text-[#B6FF50] glass-pane px-3 py-1.5 rounded-xl">
             {matchContextNote}
           </p>
         )}
 
         {/* Compact Key-Value Facts */}
-        <dl className="mt-3.5 pt-3 border-t border-[#2A2A2A] space-y-1.5 text-[11px]">
+        <dl className="mt-3.5 pt-3 border-t border-white/12 space-y-1.5 text-[11px]">
           <div className="flex items-center justify-between gap-2">
             <dt className="text-[#A3A3A3] shrink-0">Beneficiaries</dt>
             <dd className="text-white/90 text-right truncate">
@@ -187,7 +187,7 @@ export function SchemeCard({ scheme, evaluation, matchContextNote }: SchemeCardP
       </div>
 
       {/* Compact Action Footer */}
-      <div className="mt-4 pt-3 border-t border-[#2A2A2A] flex items-center justify-between gap-2">
+      <div className="mt-4 pt-3 border-t border-white/12 flex items-center justify-between gap-2">
         <button
           type="button"
           onClick={() => openSchemeDetails(scheme.id)}
@@ -201,10 +201,10 @@ export function SchemeCard({ scheme, evaluation, matchContextNote }: SchemeCardP
           type="button"
           onClick={() => toggleSaveScheme(scheme.id)}
           aria-pressed={saved}
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full border transition-colors whitespace-nowrap shrink-0 ${
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full glass-pane glass-pane-hover transition-colors whitespace-nowrap shrink-0 ${
             saved
-              ? 'border-[#B6FF50]/50 bg-[#252525] text-[#B6FF50]'
-              : 'border-[#303030] bg-[#252525] text-[#E5E5E5] hover:border-[#4A4A4A] hover:text-white'
+              ? 'border-[#B6FF50]/55 text-[#B6FF50]'
+              : 'text-[#E5E5E5] hover:text-white'
           }`}
         >
           {saved ? (

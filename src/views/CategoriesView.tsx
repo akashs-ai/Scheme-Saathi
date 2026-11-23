@@ -31,10 +31,10 @@ export function CategoriesView() {
           return (
             <div
               key={category.id}
-              className={`rounded-2xl border p-5 flex flex-col justify-between transition-colors ${
+              className={`rounded-2xl p-5 flex flex-col justify-between ${
                 isAll
-                  ? 'bg-[#232933] border-[#B6FF50]/45'
-                  : 'bg-[#1D1D1D] border-[#303030] hover:border-[#4A4A4A]'
+                  ? 'glass-window-lime'
+                  : 'glass-window glass-window-hover'
               }`}
             >
               <div>
@@ -43,7 +43,7 @@ export function CategoriesView() {
                     className={`w-10 h-10 rounded-xl border inline-flex items-center justify-center ${
                       isAll
                         ? 'bg-[#B6FF50] border-[#B6FF50] text-[#050505]'
-                        : 'bg-[#252525] border-[#353535] text-[#B6FF50]'
+                        : 'glass-pane text-[#B6FF50]'
                     }`}
                   >
                     <CategoryIcon name={category.iconName} className="w-5 h-5" />
@@ -77,7 +77,7 @@ export function CategoriesView() {
 
                 {/* Preview Top 2 Schemes Inside This Category */}
                 {!isAll && schemes.length > 0 && (
-                  <div className="mt-3.5 pt-3 border-t border-[#2A2A2A] space-y-1.5">
+                  <div className="mt-3.5 pt-3 border-t border-white/12 space-y-1.5">
                     {schemes.slice(0, 2).map((s) => (
                       <button
                         key={s.id}
@@ -98,7 +98,7 @@ export function CategoriesView() {
                 className={`mt-4 w-full inline-flex items-center justify-between px-4 py-2 rounded-full text-xs font-semibold transition-colors ${
                   isAll
                     ? 'bg-[#B6FF50] text-[#050505] hover:bg-[#c8ff78]'
-                    : 'bg-[#252525] border border-[#353535] text-white hover:border-[#B6FF50]/60 hover:text-[#B6FF50]'
+                    : 'glass-pane glass-pane-hover text-white hover:text-[#B6FF50]'
                 }`}
               >
                 <span>Browse Category</span>

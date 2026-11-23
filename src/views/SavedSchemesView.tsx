@@ -44,7 +44,7 @@ export function SavedSchemesView() {
           ))}
         </div>
       ) : (
-        <div className="bg-[#1D1D1D] border border-[#303030] rounded-2xl p-12 text-center space-y-3">
+        <div className="glass-window rounded-2xl p-12 text-center space-y-3">
           <Bookmark className="w-8 h-8 text-[#737373] mx-auto" aria-hidden="true" />
           <p className="font-display text-2xl font-bold text-white uppercase">
             No saved schemes yet
