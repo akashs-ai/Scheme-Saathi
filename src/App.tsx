@@ -1,7 +1,8 @@
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Footer } from './components/Footer';
+import { GreenSanctuaryBackground } from './components/GreenSanctuaryBackground';
 import { Navbar } from './components/Navbar';
 import { Scene } from './components/Scene';
 import { SchemeSaathiLogo } from './components/SchemeSaathiLogo';
@@ -23,6 +24,7 @@ import { SupportView } from './views/SupportView';
 
 function SchemeSaathiShell() {
   const { appStage, activeView, selectedSchemeId, toastMessage } = useSchemes();
+  const prefersReducedMotion = useReducedMotion();
   const [initializing, setInitializing] = useState(true);
 
   useEffect(() => {
@@ -61,8 +63,22 @@ function SchemeSaathiShell() {
 
   return (
     <div className="min-h-screen w-full text-white flex flex-col relative">
-      {/* Persistent Live Three.js Sylva Living World Background */}
-      <Scene />
+      {/* Persistent Forest Scene (Landing & Workspace) + Green Sanctuary Crossfade (Auth) */}
+      <motion.div
+        aria-hidden={appStage === 'auth'}
+        animate={{ opacity: appStage === 'auth' ? 0 : 1 }}
+        transition={{
+          duration: prefersReducedMotion ? 0.2 : 0.72,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        className={appStage === 'auth' ? 'fixed inset-0 z-0 pointer-events-none' : 'fixed inset-0 z-0'}
+      >
+        <Scene />
+      </motion.div>
+
+      <AnimatePresence>
+        {appStage === 'auth' && <GreenSanctuaryBackground key="bg-sanctuary" />}
+      </AnimatePresence>
 
       {/* Brief Branded Loading Screen */}
       <AnimatePresence>
@@ -81,15 +97,19 @@ function SchemeSaathiShell() {
         )}
       </AnimatePresence>
 
-      {/* Stage Transition: Landing -> Auth -> Main Workspace (Hero Page) */}
+      {/* Stage Transition: Landing <-> Auth (Green Sanctuary) -> Main Workspace */}
       <AnimatePresence mode="wait">
         {appStage === 'landing' && (
           <motion.div
             key="stage-landing"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+            animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={
+              prefersReducedMotion
+                ? { opacity: 0 }
+                : { opacity: 0, y: -14, scale: 0.992, filter: 'blur(5px)' }
+            }
+            transition={{ duration: prefersReducedMotion ? 0.18 : 0.32, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 flex flex-col flex-1 min-h-screen pointer-events-none"
           >
             <LandingPage />
@@ -99,10 +119,14 @@ function SchemeSaathiShell() {
         {appStage === 'auth' && (
           <motion.div
             key="stage-auth"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={
+              prefersReducedMotion
+                ? { opacity: 0 }
+                : { opacity: 0, y: 18, filter: 'blur(5px)' }
+            }
+            transition={{ duration: prefersReducedMotion ? 0.18 : 0.32, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 flex flex-col flex-1 min-h-screen pointer-events-none"
           >
             <AuthPage />

@@ -33,7 +33,7 @@ export function Sidebar() {
   return (
     <aside
       aria-label="Workspace sidebar"
-      className="hidden md:flex flex-col items-center justify-between py-6 px-3.5 glass-bar border-r border-white/15 shrink-0 w-[72px] pointer-events-auto"
+      className="relative z-20 hidden md:flex flex-col items-center justify-between py-6 px-3.5 glass-bar border-r border-white/15 shrink-0 w-[72px] pointer-events-auto"
     >
       {/* Top Vertical Circular Icon Buttons */}
       <div className="flex flex-col items-center gap-3">
@@ -63,10 +63,10 @@ export function Sidebar() {
                 )}
               </button>
 
-              {/* Crisp Hover Tooltip */}
+              {/* High-contrast frosted tooltip shown only on hover or keyboard focus-visible */}
               <div
                 role="tooltip"
-                className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg glass-window text-white text-[11px] font-medium whitespace-nowrap"
+                className="pointer-events-none opacity-0 group-hover:opacity-100 group-has-[:focus-visible]:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-3 py-1.5 rounded-lg bg-[#121710]/95 backdrop-blur-xl border border-white/25 shadow-[0_10px_28px_rgba(0,0,0,0.65)] text-white text-[11px] font-medium whitespace-nowrap"
               >
                 {item.label}
               </div>
@@ -91,7 +91,7 @@ export function Sidebar() {
         </button>
         <div
           role="tooltip"
-          className="pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-2.5 py-1.5 rounded-lg glass-window text-white text-[11px] font-medium whitespace-nowrap"
+          className="pointer-events-none opacity-0 group-hover:opacity-100 group-has-[:focus-visible]:opacity-100 transition-opacity duration-150 absolute left-14 top-1/2 -translate-y-1/2 z-50 px-3 py-1.5 rounded-lg bg-[#121710]/95 backdrop-blur-xl border border-white/25 shadow-[0_10px_28px_rgba(0,0,0,0.65)] text-white text-[11px] font-medium whitespace-nowrap"
         >
           Check Benefits Wizard
         </div>
